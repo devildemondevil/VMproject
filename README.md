@@ -3,13 +3,13 @@
 
 set -x  //调试
 # Function to display usage information and available options
-//展示错误的输出
+#展示错误的输出
 function display_usage {
     echo "Usage: $0 /path/to/source_directory"
 }
 
 # Check if a valid directory path is provided as a command-line argument
-//判断是否参数是零个，文件是不是文件夹
+#判断是否参数是零个，文件是不是文件夹
 if [ $# -eq 0 ] || [ ! -d "$1" ]; then
     echo "Error: Please provide a valid directory path as a command-line argument."
     display_usage
@@ -17,7 +17,7 @@ if [ $# -eq 0 ] || [ ! -d "$1" ]; then
 fi
 
 # Directory path of the source directory to be backed up
-//获取路径
+#获取路径
 source_dir="$1"
 
 # Function to create a timestamped backup folder
@@ -34,7 +34,7 @@ function create_backup {
 # Function to perform the rotation and keep only the last 3 backups
 function perform_rotation {
 
-//sed 's/:$//'正则表达式，表示替换尾部的:为空
+#sed 's/:$//'正则表达式，表示替换尾部的:为空
     local backups=($(ls -dt "${source_dir}/backup_"* 2>/dev/null |sed 's/:$//' ))  # List existing backups sorted by timestamp
 
     # Check if there are more than 3 backups
@@ -48,7 +48,7 @@ function perform_rotation {
 }
 function copyto {
 
- //ls的-I表示过滤不显示backup开头的文件
+ #ls的-I表示过滤不显示backup开头的文件
 	for name in $(ls -I "backup*" ${source_dir}/ | sed 's/:$//' 2>/dev/null)
 	do
 	
